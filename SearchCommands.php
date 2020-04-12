@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-return [
+<?php return [
     '^:help .*$' => [
         0 => [
             'dest' => '\Modules\Help\Controller\SearchController:searchHelp',
