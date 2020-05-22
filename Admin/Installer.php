@@ -20,6 +20,7 @@ use phpOMS\Module\ModuleInfo;
 use phpOMS\System\File\PathException;
 use phpOMS\System\File\PermissionException;
 use phpOMS\Utils\Parser\Php\ArrayParser;
+use phpOMS\Config\SettingsInterface;
 
 /**
  * Installer class.
@@ -34,14 +35,14 @@ final class Installer extends InstallerAbstract
     /**
      * {@inheritdoc}
      */
-    public static function install(DatabasePool $dbPool, ModuleInfo $info) : void
+    public static function install(DatabasePool $dbPool, ModuleInfo $info, SettingsInterface $cfgHandler) : void
     {
         if (\file_exists(__DIR__ . '/../SearchCommands.php')) {
             \unlink(__DIR__ . '/../SearchCommands.php');
         }
 
         \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return [];');
-        parent::install($dbPool, $info);
+        parent::install($dbPool, $info, $cfgHandler);
     }
 
     /**
