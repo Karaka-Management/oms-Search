@@ -71,11 +71,5 @@ final class ApiController extends Controller
             $request,
             $response
         );
-
-        $response->getHeader()->set('Content-Type', MimeType::M_JSON . '; charset=utf-8', true);
-        $response->set($request->getUri()->__toString(), [
-            'status'   => NotificationLevel::HIDDEN,
-            'response' => $searchResults,
-        ]);
     }
 }
