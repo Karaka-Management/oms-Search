@@ -20,6 +20,7 @@ namespace Modules\Search\tests\Admin;
 class AdminTest extends \PHPUnit\Framework\TestCase
 {
     protected const MODULE_NAME = 'Search';
+
     protected const URI_LOAD = '';
 
     use \Modules\tests\ModuleTestTrait;
