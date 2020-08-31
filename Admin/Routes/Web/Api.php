@@ -8,12 +8,12 @@ use phpOMS\Router\RouteVerb;
 return [
     '^.*/search(\?.*|$)' => [
         [
-            'dest' => '\Modules\Search\Controller\ApiController:routeSearch',
-            'verb' => RouteVerb::ANY,
+            'dest'       => '\Modules\Search\Controller\ApiController:routeSearch',
+            'verb'       => RouteVerb::ANY,
             'permission' => [
                 'module' => ApiController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::SEARCH,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::SEARCH,
             ],
         ],
     ],
