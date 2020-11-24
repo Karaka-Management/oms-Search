@@ -64,7 +64,7 @@ final class ApiController extends Controller
                 $request->getRouteVerb(),
                 $this->app->appName,
                 $this->app->orgId,
-                $this->app->accountManager->get($request->getHeader()->getAccount())
+                $this->app->accountManager->get($request->header->account)
             ),
             $request,
             $response
