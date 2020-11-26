@@ -16,7 +16,6 @@ namespace Modules\Search\Controller;
 
 use Modules\Search\Models\Search;
 use phpOMS\Module\ModuleAbstract;
-use phpOMS\Module\WebInterface;
 
 /**
  * Search class.
