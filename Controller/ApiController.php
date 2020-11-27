@@ -16,6 +16,7 @@ namespace Modules\Search\Controller;
 
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Message\RequestAbstract;
+use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Router\WebRouter;
 
@@ -45,7 +46,7 @@ final class ApiController extends Controller
     /**
      * Api method to handle basic search request
      *
-     * @param RequestAbstract  $request  Request
+     * @param HttpRequest      $request  Request
      * @param ResponseAbstract $response Response
      * @param mixed            $data     Generic data
      *
@@ -55,7 +56,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function routeSearch(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function routeSearch(HttpRequest $request, ResponseAbstract $response, $data = null) : void
     {
         $searchResults = $this->app->dispatcher->dispatch(
             $this->router->route(
