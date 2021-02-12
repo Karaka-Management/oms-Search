@@ -51,21 +51,21 @@ final class Installer extends InstallerAbstract
      * @param DatabasePool $dbPool Database pool
      * @param array        $data   Module info
      *
-     * @return void
+     * @return array
      *
      * @throws PathException This exception is thrown if the Search install file couldn't be found
      * @throws \Exception    This exception is thrown if the Search install file is invalid json
      *
      * @since 1.0.0
      */
-    public static function installExternal(DatabasePool $dbPool, array $data) : void
+    public static function installExternal(DatabasePool $dbPool, array $data) : array
     {
         if (!\file_exists(__DIR__ . '/../SearchCommands.php')) {
             \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return [];');
         }
 
         if (!\file_exists($data['path'] ?? '')) {
-            return;
+            return [];
         }
 
         if (!\file_exists(__DIR__ . '/../SearchCommands.php')) {
@@ -84,5 +84,7 @@ final class Installer extends InstallerAbstract
         $appRoutes = \array_merge_recursive($appRoutes, $moduleRoutes);
 
         \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
+
+        return [];
     }
 }
