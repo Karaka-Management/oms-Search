@@ -21,6 +21,7 @@ use phpOMS\Module\ModuleInfo;
 use phpOMS\System\File\PathException;
 use phpOMS\System\File\PermissionException;
 use phpOMS\Utils\Parser\Php\ArrayParser;
+use phpOMS\Application\ApplicationAbstract;
 
 /**
  * Installer class.
@@ -48,7 +49,7 @@ final class Installer extends InstallerAbstract
     /**
      * Install data from providing modules.
      *
-     * @param DatabasePool $dbPool Database pool
+     * @param Application $app Application
      * @param array        $data   Module info
      *
      * @return array
@@ -58,7 +59,7 @@ final class Installer extends InstallerAbstract
      *
      * @since 1.0.0
      */
-    public static function installExternal(DatabasePool $dbPool, array $data) : array
+    public static function installExternal(ApplicationAbstract $app, array $data) : array
     {
         if (!\file_exists(__DIR__ . '/../SearchCommands.php')) {
             \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return [];');
