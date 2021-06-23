@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\Search\Admin;
 
+use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Config\SettingsInterface;
 use phpOMS\DataStorage\Database\DatabasePool;
 use phpOMS\Module\InstallerAbstract;
@@ -21,7 +22,6 @@ use phpOMS\Module\ModuleInfo;
 use phpOMS\System\File\PathException;
 use phpOMS\System\File\PermissionException;
 use phpOMS\Utils\Parser\Php\ArrayParser;
-use phpOMS\Application\ApplicationAbstract;
 
 /**
  * Installer class.
@@ -49,8 +49,8 @@ final class Installer extends InstallerAbstract
     /**
      * Install data from providing modules.
      *
-     * @param Application $app Application
-     * @param array        $data   Module info
+     * @param Application $app  Application
+     * @param array       $data Module info
      *
      * @return array
      *
