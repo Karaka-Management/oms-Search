@@ -53,14 +53,4 @@
             ],
         ],
     ],
-    '^:tag .*$' => [
-        0 => [
-            'dest' => '\Modules\Tasks\Controller\SearchController:searchTags',
-            'verb' => 16,
-            'permission' => [
-                'module' => 'Tasks',
-                'type' => 2,
-            ],
-        ],
-    ],
 ];
