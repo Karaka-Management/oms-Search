@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\Search\Controller\ApiController:routeSearch',
             'verb'       => RouteVerb::ANY,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::SEARCH,
             ],
