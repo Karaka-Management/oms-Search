@@ -56,11 +56,11 @@ return [
     ],
     '^:tag .*$' => [
         0 => [
-            'dest' => '\Modules\Tasks\Controller\SearchController:searchTags',
-            'verb' => 16,
+            'dest'       => '\Modules\Tasks\Controller\SearchController:searchTags',
+            'verb'       => 16,
             'permission' => [
                 'module' => 'Tasks',
-                'type' => 2,
+                'type'   => 2,
             ],
         ],
     ],
