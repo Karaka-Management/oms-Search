@@ -44,14 +44,14 @@ final class Installer extends InstallerAbstract
     /**
      * {@inheritdoc}
      */
-    public static function install(DatabasePool $dbPool, ModuleInfo $info, SettingsInterface $cfgHandler) : void
+    public static function install(ApplicationAbstract $app, ModuleInfo $info, SettingsInterface $cfgHandler) : void
     {
         if (\file_exists(__DIR__ . '/../SearchCommands.php')) {
             \unlink(__DIR__ . '/../SearchCommands.php');
         }
 
         \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return [];');
-        parent::install($dbPool, $info, $cfgHandler);
+        parent::install($app, $info, $cfgHandler);
     }
 
     /**
