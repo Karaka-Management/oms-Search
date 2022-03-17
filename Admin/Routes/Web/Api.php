@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 use Modules\Search\Controller\ApiController;
-use Modules\Search\Models\PermissionState;
+use Modules\Search\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
@@ -25,7 +25,7 @@ return [
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::SEARCH,
+                'state'  => PermissionCategory::SEARCH,
             ],
         ],
     ],
