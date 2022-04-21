@@ -55,7 +55,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function routeSearch(HttpRequest $request, ResponseAbstract $response, $data = null) : void
+    public function routeSearch(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : void
     {
         $searchResults = $this->app->dispatcher->dispatch(
             $this->router->route(
