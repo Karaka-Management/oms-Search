@@ -6,7 +6,7 @@
  *
  * @package   Modules\Search\Admin
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -26,7 +26,7 @@ use phpOMS\Utils\Parser\Php\ArrayParser;
  * Installer class.
  *
  * @package Modules\Search\Admin
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */

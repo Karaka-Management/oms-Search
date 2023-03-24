@@ -6,7 +6,7 @@
  *
  * @package   Modules\Search
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -23,7 +23,7 @@ use phpOMS\Router\WebRouter;
  * Api controller
  *
  * @package Modules\Search
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */
@@ -59,8 +59,8 @@ final class ApiController extends Controller
     {
         $searchResults = $this->app->dispatcher->dispatch(
             $this->router->route(
-                $request->getData('search') ?? '',
-                $request->getData('CSRF'),
+                $request->getDataString('search') ?? '',
+                $request->getDataString('CSRF'),
                 $request->getRouteVerb(),
                 $this->app->appName,
                 $this->app->unitId,
