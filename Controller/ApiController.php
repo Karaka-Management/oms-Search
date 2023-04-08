@@ -62,7 +62,7 @@ final class ApiController extends Controller
                 $request->getDataString('search') ?? '',
                 $request->getDataString('CSRF'),
                 $request->getRouteVerb(),
-                $this->app->appName,
+                $this->app->appId,
                 $this->app->unitId,
                 $this->app->accountManager->get($request->header->account)
             ),
