@@ -57,7 +57,7 @@ final class ApiController extends Controller
      */
     public function routeSearch(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : void
     {
-        $searchResults = $this->app->dispatcher->dispatch(
+        $this->app->dispatcher->dispatch(
             $this->router->route(
                 $request->getDataString('search') ?? '',
                 $request->getDataString('CSRF'),
@@ -69,5 +69,9 @@ final class ApiController extends Controller
             $request,
             $response
         );
+
+        if (empty($response->$data)) {
+            $this->fillJsonRawResponse($request, $response, []);
+        }
     }
 }
