@@ -70,7 +70,7 @@ final class ApiController extends Controller
             $response
         );
 
-        if (empty($response->$data)) {
+        if (empty($response->{$data})) {
             $this->fillJsonRawResponse($request, $response, []);
         }
     }
