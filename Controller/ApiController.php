@@ -47,7 +47,7 @@ final class ApiController extends Controller
      *
      * @param HttpRequest      $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
