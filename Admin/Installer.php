@@ -45,11 +45,15 @@ final class Installer extends InstallerAbstract
      */
     public static function install(ApplicationAbstract $app, ModuleInfo $info, SettingsInterface $cfgHandler) : void
     {
-        if (\file_exists(__DIR__ . '/../SearchCommands.php')) {
-            \unlink(__DIR__ . '/../SearchCommands.php');
+        if (!\is_writable(__DIR__ . '/SearchCommands.php')) {
+            throw new PermissionException(__DIR__ . '/SearchCommands.php');
         }
 
-        \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return [];');
+        if (\is_file(__DIR__ . '/SearchCommands.php')) {
+            \unlink(__DIR__ . '/SearchCommands.php');
+        }
+
+        \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return [];');
         parent::install($app, $info, $cfgHandler);
     }
 
@@ -68,30 +72,31 @@ final class Installer extends InstallerAbstract
      */
     public static function installExternal(ApplicationAbstract $app, array $data) : array
     {
-        if (!\file_exists(__DIR__ . '/../SearchCommands.php')) {
-            \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return [];');
+        if (!\is_file(__DIR__ . '/SearchCommands.php')) {
+            \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return [];');
         }
 
-        if (!\file_exists($data['path'] ?? '')) {
+        if (!\is_file($data['path'] ?? '')) {
             return [];
         }
 
-        if (!\file_exists(__DIR__ . '/../SearchCommands.php')) {
-            throw new PathException(__DIR__ . '/../SearchCommands.php');
+        if (!\is_file(__DIR__ . '/SearchCommands.php')) {
+            throw new PathException(__DIR__ . '/SearchCommands.php');
         }
 
-        if (!\is_writable(__DIR__ . '/../SearchCommands.php')) {
-            throw new PermissionException(__DIR__ . '/../SearchCommands.php');
+        if (!\is_writable(__DIR__ . '/SearchCommands.php')) {
+            throw new PermissionException(__DIR__ . '/SearchCommands.php');
         }
 
         /** @noinspection PhpIncludeInspection */
-        $appRoutes = include __DIR__ . '/../SearchCommands.php';
+        $appRoutes = include __DIR__ . '/SearchCommands.php';
+
         /** @noinspection PhpIncludeInspection */
         $moduleRoutes = include $data['path'];
 
         $appRoutes = \array_merge_recursive($appRoutes, $moduleRoutes);
 
-        \file_put_contents(__DIR__ . '/../SearchCommands.php', '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
+        \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
 
         return [];
     }

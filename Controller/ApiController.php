@@ -39,7 +39,7 @@ final class ApiController extends Controller
         parent::__construct($app);
 
         $this->router = new WebRouter();
-        $this->router->importFromFile(__DIR__ . '/../SearchCommands.php');
+        $this->router->importFromFile(__DIR__ . '/../Admin/SearchCommands.php');
     }
 
     /**
@@ -70,7 +70,7 @@ final class ApiController extends Controller
             $response
         );
 
-        if (empty($response->{$data})) {
+        if (empty($response->data)) {
             $this->fillJsonRawResponse($request, $response, []);
         }
     }

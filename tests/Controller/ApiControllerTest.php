@@ -102,7 +102,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request  = new HttpRequest(new HttpUri(''));
 
         $request->header->account = 1;
-        $request->setData('search', ':help file');
+        $request->setData('search', ':help introduction');
 
         $this->module->routeSearch($request, $response);
         self::assertGreaterThan(0, \count($response->get('')));
