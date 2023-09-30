@@ -98,6 +98,9 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
      */
     public function testApiSearch() : void
     {
+        $searchRoutes = include __DIR__ . '/../../Admin/SearchCommands.php';
+        self::assertGreaterThan(0, \count($searchRoutes));
+
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
 
@@ -105,6 +108,6 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request->setData('search', ':help introduction');
 
         $this->module->routeSearch($request, $response);
-        self::assertGreaterThan(0, \count($response->get('')));
+        self::assertGreaterThan(0, \count($response->get($request->uri->__toString())));
     }
 }
