@@ -45,11 +45,15 @@ final class Installer extends InstallerAbstract
      */
     public static function install(ApplicationAbstract $app, ModuleInfo $info, SettingsInterface $cfgHandler) : void
     {
-        if (!\is_writable(__DIR__ . '/SearchCommands.php')) {
-            throw new PermissionException(__DIR__ . '/SearchCommands.php');
+        if (!\is_writable(__DIR__ . '/')) {
+            throw new PermissionException(__DIR__ . '/');
         }
 
         if (\is_file(__DIR__ . '/SearchCommands.php')) {
+            if (!\is_writable(__DIR__ . '/SearchCommands.php')) {
+                throw new PermissionException(__DIR__ . '/SearchCommands.php');
+            }
+
             \unlink(__DIR__ . '/SearchCommands.php');
         }
 
