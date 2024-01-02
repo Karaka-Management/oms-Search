@@ -17,7 +17,7 @@ namespace Modules\Search\Models;
 use phpOMS\Stdlib\Base\Enum;
 
 /**
- * Permision state enum.
+ * Permission category enum.
  *
  * @package Modules\Search\Models
  * @license OMS License 2.0
