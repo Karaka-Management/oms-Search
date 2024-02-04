@@ -20,7 +20,7 @@ use phpOMS\Router\RouteVerb;
 return [
     '^.*/search(\?.*|$)' => [
         [
-            'dest'       => '\Modules\Search\Controller\ApiController:routeSearch',
+            'dest'       => '\Modules\Search\Controller\ApiController:search',
             'verb'       => RouteVerb::ANY,
             'permission' => [
                 'module' => ApiController::NAME,

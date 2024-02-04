@@ -15,19 +15,23 @@ declare(strict_types=1);
 namespace Modules\Search\Controller;
 
 use phpOMS\Application\ApplicationAbstract;
+use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\HttpRequest;
+use phpOMS\Message\Http\HttpResponse;
+use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
+use phpOMS\Views\View;
 use phpOMS\Router\WebRouter;
 
 /**
- * Api controller
+ * Backend controller
  *
  * @package Modules\Search
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */
-final class ApiController extends Controller
+final class BackendController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -41,9 +45,9 @@ final class ApiController extends Controller
     }
 
     /**
-     * Api method to handle basic search request
+     * Backend method to handle basic search request
      *
-     * @param HttpRequest      $request  Request
+     * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
      * @param array            $data     Generic data
      *
@@ -53,12 +57,21 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function search(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : void
+    public function search(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
-        $data = $this->routeSearch($request, $response, $data);
+        $view = new View($this->app->l11nManager, $request, $response);
+        $view->setTemplate('/Modules/Search/Theme/Backend/search-result');
 
-        if (empty($data)) {
-            $this->fillJsonRawResponse($request, $response, []);
-        }
+        $internalRequest = clone $request;
+        $internalResponse = clone $response;
+
+        $internalResponse->header = clone $request->header;
+
+        $internalResponse->data = [];
+
+        $temp       = empty($request->getDataString('search')) ? [] : $this->routeSearch($internalRequest, $internalResponse, $data);
+        $view->data = empty($temp) ? [] : \reset($temp);
+
+        return $view;
     }
 }

@@ -12,4 +12,21 @@
  */
 declare(strict_types=1);
 
-return [];
+use Modules\Search\Controller\BackendController;
+use Modules\Search\Models\PermissionCategory;
+use phpOMS\Account\PermissionType;
+use phpOMS\Router\RouteVerb;
+
+return [
+    '^.*/search(\?.*|$)' => [
+        [
+            'dest'       => '\Modules\Search\Controller\BackendController:search',
+            'verb'       => RouteVerb::ANY,
+            'permission' => [
+                'module' => BackendController::NAME,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionCategory::SEARCH,
+            ],
+        ],
+    ],
+];

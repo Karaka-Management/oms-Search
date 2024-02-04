@@ -15,7 +15,10 @@ declare(strict_types=1);
 namespace Modules\Search\Controller;
 
 use Modules\Search\Models\Search;
+use phpOMS\Message\Http\HttpRequest;
+use phpOMS\Message\ResponseAbstract;
 use phpOMS\Module\ModuleAbstract;
+use phpOMS\Router\RouterInterface;
 
 /**
  * Search class.
@@ -75,4 +78,37 @@ class Controller extends ModuleAbstract
      * @since 1.0.0
      */
     public static array $dependencies = [];
+
+    protected ?RouterInterface $router = null;
+
+    /**
+     * Api method to handle basic search request
+     *
+     * @param HttpRequest      $request  Request
+     * @param ResponseAbstract $response Response
+     * @param array            $data     Generic data
+     *
+     * @return array
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function routeSearch(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : array
+    {
+        $this->app->dispatcher->dispatch(
+            $this->router->route(
+                $request->getDataString('search') ?? '',
+                $request->getDataString('CSRF'),
+                $request->getRouteVerb(),
+                $this->app->appId,
+                $this->app->unitId,
+                $this->app->accountManager->get($request->header->account)
+            ),
+            $request,
+            $response
+        );
+
+        return $response->data;
+    }
 }
