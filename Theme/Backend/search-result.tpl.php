@@ -31,6 +31,10 @@ foreach ($this->data as $controller) :
     </div>
 </div>
 <?php if ($first['type'] === 'list_links') : ?>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="portlet">
+                <table class="default sticky"><tbody>
     <?php foreach ($controller as $data) :
         if (empty($data)) {
             continue;
@@ -41,35 +45,25 @@ foreach ($this->data as $controller) :
         $summary = $data['summary'];
         $summary = \trim($summary, " #\n");
     ?>
-    <div class="row">
-        <div class="col-xs-12">
-            <section class="portlet">
-            <?php if (!empty($data['title']) && !empty($summary)) : ?>
-                <a href="<?= UriFactory::build($data['link']); ?>">
-                <div class="portlet-head"><?= $this->printHtml(\trim($data['title'])); ?></div>
-                </a>
-            <?php elseif (!empty($data['title']) && empty($summary)) : ?>
-                <a href="<?= UriFactory::build($data['link']); ?>">
-                <div class="portlet-body"><?= $this->printHtml(\trim($data['title'])); ?></div>
-                </a>
-            <?php endif; ?>
-            <?php if (!empty($summary)) : ?>
-                <div class="portlet-body"><article><?= Markdown::parse($summary); ?></article></div>
-            <?php endif; ?>
+    <tr data-href="<?= UriFactory::build($data['link']); ?>">
+        <td class="wf-100">
+            <a href="<?= UriFactory::build($data['link']); ?>">
+                <?= $this->printHtml(\trim($data['title'])); ?>
+            </a>
+        <td class="sm-hidden">
             <?php if (!empty($data['tags'])) : ?>
-                <div class="portlet-foot">
                 <?php foreach ($data['tags'] as $tag) : ?>
                     <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>">
                         <?= empty($tag->icon) ? '' : ''; ?>
                         <?= $this->printHtml($tag->getL11n()); ?>
                     </span>
-                    <?php endforeach; ?>
-                </div>
+                <?php endforeach; ?>
             <?php endif; ?>
-            </section>
+    <?php endforeach; ?>
+                </table>
+            </div>
         </div>
     </div>
-    <?php endforeach; ?>
     <?php elseif ($first['type'] === 'list_accounts') : ?>
         <div class="row">
             <?php foreach ($controller as $data) :
