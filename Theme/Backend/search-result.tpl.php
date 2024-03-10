@@ -54,7 +54,7 @@ foreach ($this->data as $controller) :
             <?php if (!empty($data['tags'])) : ?>
                 <?php foreach ($data['tags'] as $tag) : ?>
                     <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>">
-                        <?= empty($tag->icon) ? '' : ''; ?>
+                        <?= empty($tag->icon) ? '' : '<i class="g-icon">' . $this->printHtml($tag->icon) . '</i>'; ?>
                         <?= $this->printHtml($tag->getL11n()); ?>
                     </span>
                 <?php endforeach; ?>
