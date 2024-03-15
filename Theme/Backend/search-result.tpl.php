@@ -13,7 +13,6 @@
 declare(strict_types=1);
 
 use phpOMS\Uri\UriFactory;
-use phpOMS\Utils\Parser\Markdown\Markdown;
 
 $isEmpty = true;
 ?>

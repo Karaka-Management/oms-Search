@@ -47,7 +47,7 @@ final class ApiController extends Controller
      * @param ResponseAbstract $response Response
      * @param array            $data     Generic data
      *
-     * @return array
+     * @return void
      *
      * @api
      *

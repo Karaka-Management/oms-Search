@@ -96,6 +96,10 @@ class Controller extends ModuleAbstract
      */
     public function routeSearch(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : array
     {
+        if ($this->router === null) {
+            return [];
+        }
+
         $this->app->dispatcher->dispatch(
             $this->router->route(
                 $request->getDataString('search') ?? '',

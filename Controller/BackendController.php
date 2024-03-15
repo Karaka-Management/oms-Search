@@ -16,12 +16,10 @@ namespace Modules\Search\Controller;
 
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Contract\RenderableInterface;
-use phpOMS\Message\Http\HttpRequest;
-use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
-use phpOMS\Views\View;
 use phpOMS\Router\WebRouter;
+use phpOMS\Views\View;
 
 /**
  * Backend controller
@@ -51,18 +49,18 @@ final class BackendController extends Controller
      * @param ResponseAbstract $response Response
      * @param array            $data     Generic data
      *
-     * @return array
+     * @return RenderableInterface
      *
      * @api
      *
      * @since 1.0.0
      */
-    public function search(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
+    public function search(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Search/Theme/Backend/search-result');
 
-        $internalRequest = clone $request;
+        $internalRequest  = clone $request;
         $internalResponse = clone $response;
 
         $internalResponse->header = clone $request->header;

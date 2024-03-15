@@ -13,5 +13,5 @@
 declare(strict_types=1);
 
 return ['Search' => [
-    'NoResults'            => 'No search results',
+    'NoResults' => 'No search results',
 ]];
