@@ -29,8 +29,6 @@ use phpOMS\Router\WebRouter;
  */
 final class ApiController extends Controller
 {
-    private $router = null;
-
     /**
      * {@inheritdoc}
      */
@@ -55,22 +53,11 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function routeSearch(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : void
+    public function search(HttpRequest $request, ResponseAbstract $response, mixed $data = null) : void
     {
-        $this->app->dispatcher->dispatch(
-            $this->router->route(
-                $request->getDataString('search') ?? '',
-                $request->getDataString('CSRF'),
-                $request->getRouteVerb(),
-                $this->app->appId,
-                $this->app->unitId,
-                $this->app->accountManager->get($request->header->account)
-            ),
-            $request,
-            $response
-        );
+        $data = $this->routeSearch($request, $response, $data);
 
-        if (empty($response->data)) {
+        if (empty($data)) {
             $this->fillJsonRawResponse($request, $response, []);
         }
     }

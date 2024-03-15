@@ -29,7 +29,6 @@ use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Module\ModuleAbstract;
 use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
-use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\TestUtils;
 
 /**
@@ -102,7 +101,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertGreaterThan(0, \count($searchRoutes));
 
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('search', ':help introduction');
