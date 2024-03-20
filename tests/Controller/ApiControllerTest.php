@@ -32,10 +32,10 @@ use phpOMS\Router\WebRouter;
 use phpOMS\Utils\TestUtils;
 
 /**
- * @testdox Modules\Search\tests\Controller\ApiControllerTest: Search api controller
- *
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Search\Controller\ApiController::class)]
+#[\PHPUnit\Framework\Attributes\TestDox('Modules\Search\tests\Controller\ApiControllerTest: Search api controller')]
 final class ApiControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected ApplicationAbstract $app;
@@ -91,10 +91,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         TestUtils::setMember($this->module, 'app', $this->app);
     }
 
-    /**
-     * @covers Modules\Search\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSearch() : void
     {
         $searchRoutes = include __DIR__ . '/../../Admin/SearchCommands.php';
