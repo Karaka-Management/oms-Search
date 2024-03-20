@@ -92,7 +92,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Search\Controller\ApiController
+     * @covers \Modules\Search\Controller\ApiController
      * @group module
      */
     public function testApiSearch() : void
