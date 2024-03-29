@@ -18,7 +18,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/search(\?.*|$)' => [
+    '^/search(\?.*|$)' => [
         [
             'dest'       => '\Modules\Search\Controller\BackendController:search',
             'verb'       => RouteVerb::ANY,
