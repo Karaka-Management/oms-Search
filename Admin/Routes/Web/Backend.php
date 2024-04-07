@@ -22,7 +22,7 @@ return [
         [
             'dest'       => '\Modules\Search\Controller\BackendController:search',
             'verb'       => RouteVerb::ANY,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
