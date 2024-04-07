@@ -23,6 +23,7 @@ return [
             'dest'       => '\Modules\Search\Controller\ApiController:search',
             'verb'       => RouteVerb::ANY,
             'csrf'       => true,
+            'active' => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::READ,
