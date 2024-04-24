@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Modules\QA
  * @copyright Dennis Eichhorn
@@ -51,12 +51,14 @@ foreach ($this->data as $controller) :
             </a>
         <td class="sm-hidden">
             <?php if (!empty($data['tags'])) : ?>
+                <div class="tag-list">
                 <?php foreach ($data['tags'] as $tag) : ?>
                     <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>">
                         <?= empty($tag->icon) ? '' : '<i class="g-icon">' . $this->printHtml($tag->icon) . '</i>'; ?>
                         <?= $this->printHtml($tag->getL11n()); ?>
                     </span>
                 <?php endforeach; ?>
+                </div>
             <?php endif; ?>
     <?php endforeach; ?>
                 </table>

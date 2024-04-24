@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Modules
  * @copyright Dennis Eichhorn
@@ -18,10 +18,11 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/search(\?.*|$)' => [
+    '^/search(\?.*|$)' => [
         [
             'dest'       => '\Modules\Search\Controller\BackendController:search',
             'verb'       => RouteVerb::ANY,
+            'active'     => true,
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,

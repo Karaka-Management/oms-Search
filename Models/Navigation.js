@@ -9,12 +9,12 @@ export class Navigation {
     constructor (data)
     {
         if (typeof data === 'undefined') {
-            this.scrollPosition = {x: 0, y: 0};
+            this.scrollPosition = { x: 0, y: 0 };
             this.activeLinks    = {};
             this.visible        = true;
             this.openCategories = {};
         } else {
-            this.scrollPosition = typeof data.scrollPosition === 'undefined' ? {x : 0, y : 0} : data.scrollPosition;
+            this.scrollPosition = typeof data.scrollPosition === 'undefined' ? { x: 0, y: 0 } : data.scrollPosition;
             this.activeLinks    = typeof data.activeLinks === 'undefined' ? {} : data.activeLinks;
             this.visible        = typeof data.visible === 'undefined' ? true : data.visible;
             this.openCategories = typeof data.openCategories === 'undefined' ? {} : data.openCategories;

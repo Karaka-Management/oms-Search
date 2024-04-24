@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Modules
  * @copyright Dennis Eichhorn
@@ -22,6 +22,8 @@ return [
         [
             'dest'       => '\Modules\Search\Controller\ApiController:search',
             'verb'       => RouteVerb::ANY,
+            'csrf'       => true,
+            'active'     => true,
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::READ,
