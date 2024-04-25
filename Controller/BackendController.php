@@ -16,6 +16,7 @@ namespace Modules\Search\Controller;
 
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Router\WebRouter;
