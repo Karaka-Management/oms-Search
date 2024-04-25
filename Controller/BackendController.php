@@ -45,7 +45,7 @@ final class BackendController extends Controller
     /**
      * Backend method to handle basic search request
      *
-     * @param RequestAbstract  $request  Request
+     * @param HttpRequest      $request  Request
      * @param ResponseAbstract $response Response
      * @param array            $data     Generic data
      *
@@ -55,7 +55,7 @@ final class BackendController extends Controller
      *
      * @since 1.0.0
      */
-    public function search(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
+    public function search(HttpRequest $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Search/Theme/Backend/search-result');
