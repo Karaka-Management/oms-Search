@@ -41,6 +41,30 @@ final class Installer extends InstallerAbstract
     public const PATH = __DIR__;
 
     /**
+     * Commands.
+     *
+     * Include consideres the state of the file during script execution.
+     * This means setting it to empty has no effect if it was not empty before.
+     * There are also other merging bugs that can happen.
+     *
+     * @var array
+     * @since 1.0.0
+     */
+    private static array $commands = [];
+
+    /**
+     * Is first command load?
+     *
+     * Include consideres the state of the file during script execution.
+     * This means setting it to empty has no effect if it was not empty before.
+     * There are also other merging bugs that can happen.
+     *
+     * @var bool
+     * @since 1.0.0
+     */
+    private static bool $isFirstLoad = true;
+
+    /**
      * {@inheritdoc}
      */
     public static function install(ApplicationAbstract $app, ModuleInfo $info, SettingsInterface $cfgHandler) : void
@@ -58,6 +82,7 @@ final class Installer extends InstallerAbstract
         }
 
         \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return [];');
+        self::$isFirstLoad = false;
         parent::install($app, $info, $cfgHandler);
     }
 
@@ -92,15 +117,18 @@ final class Installer extends InstallerAbstract
             throw new PermissionException(__DIR__ . '/SearchCommands.php');
         }
 
-        /** @noinspection PhpIncludeInspection */
-        $appRoutes = include __DIR__ . '/SearchCommands.php';
+        if (self::$isFirstLoad) {
+            /** @noinspection PhpIncludeInspection */
+            self::$commands    = include __DIR__ . '/SearchCommands.php';
+            self::$isFirstLoad = false;
+        }
 
         /** @noinspection PhpIncludeInspection */
         $moduleRoutes = include $data['path'];
 
-        $appRoutes = \array_merge_recursive($appRoutes, $moduleRoutes);
+        self::$commands = \array_merge_recursive(self::$commands, $moduleRoutes);
 
-        \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return ' . ArrayParser::serializeArray($appRoutes) . ';', \LOCK_EX);
+        \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return ' . ArrayParser::serializeArray(self::$commands) . ';', \LOCK_EX);
 
         return [];
     }

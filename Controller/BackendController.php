@@ -17,7 +17,6 @@ namespace Modules\Search\Controller;
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\Http\HttpRequest;
-use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Router\WebRouter;
 use phpOMS\Views\View;
@@ -54,6 +53,9 @@ final class BackendController extends Controller
      *
      * @api
      *
+     * @todo Search prioritization
+     *      https://github.com/Karaka-Management/oms-Search/issues/1
+     *
      * @since 1.0.0
      */
     public function search(HttpRequest $request, ResponseAbstract $response, array $data = []) : RenderableInterface
@@ -68,8 +70,14 @@ final class BackendController extends Controller
 
         $internalResponse->data = [];
 
-        $temp       = empty($request->getDataString('search')) ? [] : $this->routeSearch($internalRequest, $internalResponse, $data);
-        $view->data = empty($temp) ? [] : \reset($temp);
+        $temp = empty($request->getDataString('search'))
+            ? []
+            : $this->routeSearch($internalRequest, $internalResponse, $data);
+
+        $response->header = $internalResponse->header;
+
+        $responseData = \reset($temp);
+        $view->data   = empty($temp) || !\is_array($responseData) ? [] : $responseData;
 
         return $view;
     }

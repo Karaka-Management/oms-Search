@@ -76,13 +76,14 @@ foreach ($this->data as $controller) :
         ?>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <section class="portlet">
-                    <div class="portlet-head">
+                    <div class="<?= empty($data['email']) && empty($data['phone']) && empty($data['city']) ? 'portlet-body' : 'portlet-head'; ?>">
                         <a style="display: flex; align-items: center;" href="<?= UriFactory::build($data['link']); ?>">
                             <img class="profile-image" alt="account" loading="lazy"
                                     src="<?= UriFactory::build($data['image']); ?>">
                             <span style="margin-left: .5rem;"><?= $this->printHtml($data['title']); ?></span>
                         </a>
                     </div>
+                    <?php if (!empty($data['email']) || !empty($data['phone']) || !empty($data['city'])) : ?>
                     <div class="portlet-body">
                         <div>
                             <table class="wf-100" style="font-size: .9rem;">
@@ -92,6 +93,7 @@ foreach ($this->data as $controller) :
                             </table>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </section>
             </div>
         <?php endforeach; ?>
