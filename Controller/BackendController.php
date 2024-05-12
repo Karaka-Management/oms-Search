@@ -53,9 +53,6 @@ final class BackendController extends Controller
      *
      * @api
      *
-     * @todo Search prioritization
-     *      https://github.com/Karaka-Management/oms-Search/issues/1
-     *
      * @since 1.0.0
      */
     public function search(HttpRequest $request, ResponseAbstract $response, array $data = []) : RenderableInterface
@@ -73,8 +70,6 @@ final class BackendController extends Controller
         $temp = empty($request->getDataString('search'))
             ? []
             : $this->routeSearch($internalRequest, $internalResponse, $data);
-
-        $response->header = $internalResponse->header;
 
         $responseData = \reset($temp);
         $view->data   = empty($temp) || !\is_array($responseData) ? [] : $responseData;

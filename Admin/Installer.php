@@ -126,7 +126,14 @@ final class Installer extends InstallerAbstract
         /** @noinspection PhpIncludeInspection */
         $moduleRoutes = include $data['path'];
 
-        self::$commands = \array_merge_recursive(self::$commands, $moduleRoutes);
+        $tmp = \array_merge_recursive(self::$commands, $moduleRoutes);
+        foreach ($tmp as $route => $endpoints) {
+            \usort($endpoints, function (array $a, array $b) {
+                return ($a['order'] ?? 0) <=> ($b['order'] ?? 0);
+            });
+
+            self::$commands[$route] = $endpoints;
+        }
 
         \file_put_contents(__DIR__ . '/SearchCommands.php', '<?php return ' . ArrayParser::serializeArray(self::$commands) . ';', \LOCK_EX);
 
