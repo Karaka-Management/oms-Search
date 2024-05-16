@@ -8,6 +8,6 @@ The target group for this module is everyone, since every application should hav
 
 # Setup
 
-This module doesn't have any additional setup requirements since it is installed during the application install process.
+This module doesn't have any additional setup requirements.
 
 The module can be installed through the integrated module downloader and installer or by uploading the module into the `Modules/` directory and executing the installation through the module installer.
